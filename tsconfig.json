@@ -19,6 +19,6 @@
   ],
   "exclude": [
     "node_modules",
-    "supabase/functions/submit-score"
+    "supabase/functions/submit-score/index.ts"
   ]
 }

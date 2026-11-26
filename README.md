@@ -11,7 +11,7 @@ npm install
 npx expo start          # press i / a / w for iOS, Android, web
 ```
 
-Without Supabase env vars the app runs fully offline and shows sample world stats. To go live, copy `.env.example` to `.env.local` and fill it in.
+`.env` points at the live Supabase project (`glance`, org Potential_Use, eu-central-1, ref `opnrzoklnvxapfqlnpjl`). It holds only public values. Remove them and the app runs fully offline with sample world stats.
 
 ## Layout
 
@@ -33,7 +33,9 @@ CI runs the same on every push, plus a web export and `deno check` on the edge f
 
 ## Backend
 
-1. Create a Supabase project, then `supabase link --project-ref <ref>`.
+Already live: migration applied, `submit-score` deployed (JWT check off; the function validates its own input), cron job running. To change it:
+
+1. `supabase link --project-ref opnrzoklnvxapfqlnpjl`.
 2. `supabase db push` applies `supabase/migrations` (scores, day_stats, RLS, a pg_cron job every 10 min).
 3. `supabase secrets set IP_SALT=<random string>` and `supabase functions deploy submit-score`.
 4. Put the project URL and anon key in `.env.local` (and in EAS environment variables for builds).

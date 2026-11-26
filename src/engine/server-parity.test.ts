@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as server from '../../supabase/functions/_shared/game';
+import * as server from '../../supabase/functions/submit-score/game';
 import { addDays, Answer, buildSet, pickTasks, pts } from './index';
 
 describe('server validation matches the app', () => {

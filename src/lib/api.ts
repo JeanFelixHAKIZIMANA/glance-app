@@ -5,7 +5,8 @@ import { getState, Pending, setState } from './store';
 const URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 const online = !!(URL && KEY);
-const headers = { apikey: KEY ?? '', Authorization: `Bearer ${KEY}`, 'content-type': 'application/json' };
+// Publishable key goes in `apikey` only; it is not a JWT, so it must not be sent as a Bearer token.
+const headers = { apikey: KEY ?? '', 'content-type': 'application/json' };
 
 async function call(path: string, init: RequestInit = {}, tries = 3): Promise<Response> {
   for (let i = 0; ; i++) {

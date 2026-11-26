@@ -2,7 +2,9 @@ name: ci
 on:
   push: { branches: [main] }
   pull_request:
-concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -23,4 +25,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with: { deno-version: v2.x }
-      - run: deno check supabase/functions/submit-score/index.ts
+      - run: deno check --node-modules-dir=none supabase/functions/submit-score/index.ts
